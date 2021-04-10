@@ -1,0 +1,132 @@
+{% extends "base.html" %} 
+{% block body %} 
+{% for order in orders%} 
+{% for violin in violins%} 
+{% if order.violin_id ==violin.id %}
+<!---cart items details-->
+<div class="small-container cart-page">
+    <table>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>
+                <div class="cart-info">
+                    <img src="{{url_for('static',filename='products/' + violin.product_images)}}" class="card-img-top"valt="..." style="border-radius: 100px; width: 50%"/>
+                    <div>
+                        <p>{{ violin.product_name}}</p>
+                        <small class="text-light">Price: ${{violin.price}}</small>
+                        <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                    </div>
+                </div>
+            
+            
+            </td>
+            <td><input type="number" value="1"></td>
+            <td class="text-light">${{violin.price}}</td>
+        </tr>
+        
+    </table>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Delete Post?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <form action= "{{url_for('delete_order', shoppingorder_id=violin.id) }}" method="POST">
+                <input class="btn btn-danger" type="submit" value="Delete">
+            </form>
+            </div>
+        </div>
+        </div>
+    </div>
+
+{% endif %} {% endfor %} 
+{% endfor %} 
+
+<div class="total-price text-light">
+    <table>
+        <tr>
+            <td>Username</td>
+            <td>{{current_user.username}}</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>{{current_user.email_address}}</td>
+        </tr>
+        <tr>
+            <td>Total</td>
+            <td>$50000.00</td>
+        </tr>
+    </table>
+</div>
+</div>
+
+<style>
+    body {
+        background-image: url({{url_for('static', filename= 'products/background9.jpeg')}});
+        background-size: cover;
+    }
+    .cart-page{
+        margin:80px auto;
+    }
+    table{
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .cart-info{
+        display: flex;
+        flex-wrap: wrap;
+        padding: 70px;
+
+    }
+    th{
+        text-align: left;
+        padding: 5px;
+        color: #fff;
+        background: burlywood;
+        font-weight: normal;
+    }
+    td{
+        padding: 10px 5px;
+    }
+    td input{
+        width: 40px;
+        height: 30px;
+        padding: 5px;
+    }
+    td a{
+        color:burlywood;
+        font-size: 12px;
+    }
+    td img{
+        width: 80%;
+        height: 80%;
+        margin-right: 10px;
+    }
+    .total-price{
+        display: flex;
+        justify-content: flex-end;
+    }
+    .total-price table{
+        border-top: 3px solid burlywood;
+        width: 100%;
+        max-width: 400px;
+    }
+    td:last-child{
+        text-align: right;
+    }
+    th:last-child{
+        text-align: right;
+    }
+    .cart-info p{
+        display: none;
+    }
+</style>
+{% endblock body %}

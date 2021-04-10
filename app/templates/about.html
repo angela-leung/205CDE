@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block body %}
+    <h1 class="text-light">About Page</h1>
+    <p >Violin Factory House provides string instrument repairing, tone adjustment and maintenance, such as bow repairing, curvature adjustment and bridge maintenance. <br><br> Here you can find your own instrument, no matter it is new, old, antique violin, viola, cello and bow.<br><br> We believe every single instrument is unique, and every single player's favor is different.<br><br> Our responsibility is to provide you with professional suggestion and your choice of your personalised instrument. </p>
+    <div class="col-md-5">
+          <style>
+            body {
+                background-image: url({{url_for('static', filename= 'products/background6.jpeg')}});
+                background-size: cover;
+                color: white;
+            }
+          </style>
+        </div>
+      </div>
+{% endblock body %}
